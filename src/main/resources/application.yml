@@ -12,10 +12,13 @@ management:
     web:
       exposure:
         include: health,info
+  endpoint:
+    health:
+      show-details: never
   info:
     env:
       enabled: true
 
-info:
-  team:
-    name: ${app.team-name:local-team}
+logging:
+  level:
+    root: INFO

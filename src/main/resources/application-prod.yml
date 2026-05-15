@@ -16,21 +16,5 @@ spring:
       region:
         static: ap-northeast-2
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info
-  endpoint:
-    health:
-      show-details: never
-  info:
-    env:
-      enabled: true
-
 info:
   team-name: ${app.team-name}
-
-logging:
-  level:
-    root: INFO

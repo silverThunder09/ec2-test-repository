@@ -7,13 +7,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+    show-sql: true
 
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,info
-
-  info:
-    env:
-      enabled: true
+info:
+  team-name: local-team
