@@ -1,0 +1,36 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+    import:
+      - aws-parameterstore:/team-app/prod/db/?prefix=spring.datasource.
+      - aws-parameterstore:/team-app/?prefix=app.
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+  cloud:
+    aws:
+      region:
+        static: ap-northeast-2
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: never
+  info:
+    env:
+      enabled: true
+
+info:
+  team-name: ${app.team-name}
+
+logging:
+  level:
+    root: INFO

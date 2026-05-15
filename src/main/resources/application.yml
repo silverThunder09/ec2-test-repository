@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: ec2-test
+  profiles:
+    active: local
+
+server:
+  port: 8080
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  info:
+    env:
+      enabled: true
+
+info:
+  team:
+    name: ${app.team-name:local-team}
