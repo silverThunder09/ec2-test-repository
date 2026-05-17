@@ -15,7 +15,8 @@ public class ApiLoggingFilter extends OncePerRequestFilter {
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        return !request.getRequestURI().startsWith("/api/");
+        String requestUri = request.getRequestURI();
+        return !(requestUri.startsWith("/api/") || requestUri.startsWith("/actuator/"));
     }
 
     @Override
@@ -24,7 +25,21 @@ public class ApiLoggingFilter extends OncePerRequestFilter {
             HttpServletResponse response,
             FilterChain filterChain
     ) throws ServletException, IOException {
-        log.info("[API - LOG] method={}, uri={}", request.getMethod(), request.getRequestURI());
+        log.info(
+                "[API - LOG] method={}, uri={}, clientIp={}",
+                request.getMethod(),
+                request.getRequestURI(),
+                extractClientIp(request)
+        );
         filterChain.doFilter(request, response);
+    }
+
+    private String extractClientIp(HttpServletRequest request) {
+        String forwardedFor = request.getHeader("X-Forwarded-For");
+        if (forwardedFor == null || forwardedFor.isBlank()) {
+            return request.getRemoteAddr();
+        }
+
+        return forwardedFor.split(",")[0].trim();
     }
 }
