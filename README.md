@@ -38,4 +38,15 @@ JSON 출력 값
 
 ![EC2-terminal-docker-success.png](src/main/resources/images/EC2-terminal-docker-success.png)
 
+## LV 5 - 고가용성 아키텍처와 보안 도메인 연결 (ALB + ASG + HTTPS)
+
+### HTTPS 적용된 도메인 URL
+
+> https://eungilab/actuator/health
+
+![https-domain.png](src/main/resources/images/https-domain.png)
+
+### Target Group(대상 그룹) 이미지
+
+![target-group-healthy.png](src/main/resources/images/target-group-healthy.png)
 
