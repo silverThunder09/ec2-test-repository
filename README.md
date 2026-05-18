@@ -50,3 +50,8 @@ JSON 출력 값
 
 ![target-group-healthy.png](src/main/resources/images/target-group-healthy.png)
 
+## LV 6 - 글로벌 성능 최적화 (CloudFront CDN)
+
+![cloudfrontUrlimage.png](src/main/resources/images/cloudfrontUrlimage.png)
+
+> https://d3w1yu1880fz6f.cloudfront.net/members/2/profile/af1ef804-b106-4940-add8-5f13703b488c.jpeg
