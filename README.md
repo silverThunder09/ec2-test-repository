@@ -27,3 +27,15 @@ JSON 출력 값
 ![profile-image-response.png](src/main/resources/images/profile-image-response.png)
 
 ![profile-image-access-success.png](src/main/resources/images/profile-image-access-success.png)
+
+## LV 4 - Docker & CI/CD 파이프라인 구축
+
+### Github Actions 성공 이미지
+
+![GitHub-Actions-CI-success.png](src/main/resources/images/GitHub-Actions-CI-success.png)
+
+### EC2 터미널 이미지
+
+![EC2-terminal-docker-success.png](src/main/resources/images/EC2-terminal-docker-success.png)
+
+
