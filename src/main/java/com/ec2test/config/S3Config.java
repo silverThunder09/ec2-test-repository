@@ -2,13 +2,13 @@ package com.ec2test.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.presigner.S3Presigner;
 
 @Configuration
-@Profile("!test")
+@ConditionalOnProperty(name = "app.s3.mock", havingValue = "false", matchIfMissing = true)
 public class S3Config {
 
     @Bean

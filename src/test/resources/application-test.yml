@@ -11,6 +11,7 @@ spring:
 
 app:
   s3:
+    mock: true
     bucket: test-bucket
 
 info:
