@@ -2,26 +2,33 @@ package com.ec2test.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 import com.ec2test.dto.MemberRequestDto;
 import com.ec2test.dto.MemberResponseDto;
+import com.ec2test.entity.Member;
 import com.ec2test.exception.MemberNotFoundException;
+import com.ec2test.repository.MemberRepository;
 import java.lang.reflect.Field;
+import java.util.Optional;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-@SpringBootTest
-@ActiveProfiles("test")
+@ExtendWith(MockitoExtension.class)
 class MemberServiceTest {
 
-    @Autowired
+    @InjectMocks
     private MemberService memberService;
 
-    @MockitoBean
+    @Mock
+    private MemberRepository memberRepository;
+
+    @Mock
     private S3Service s3Service;
 
     @Test
@@ -32,8 +39,18 @@ class MemberServiceTest {
         setField(requestDto, "age", 27);
         setField(requestDto, "mbti", "INTJ");
 
+        Member savedMember = Member.builder()
+                .name("Eungi")
+                .age(27)
+                .mbti("INTJ")
+                .build();
+        setField(savedMember, "id", 1L);
+
+        when(memberRepository.save(any(Member.class))).thenReturn(savedMember);
+
         MemberResponseDto responseDto = memberService.createMember(requestDto);
 
+        assertEquals(1L, responseDto.getId());
         assertEquals("Eungi", responseDto.getName());
         assertEquals(27, responseDto.getAge());
         assertEquals("INTJ", responseDto.getMbti());
@@ -42,6 +59,8 @@ class MemberServiceTest {
     @Test
     @DisplayName("없는 팀원 조회 시 예외를 던진다")
     void getMemberNotFound() {
+        when(memberRepository.findById(9999L)).thenReturn(Optional.empty());
+
         assertThrows(MemberNotFoundException.class, () -> memberService.getMember(9999L));
     }
 
