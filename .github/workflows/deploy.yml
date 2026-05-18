@@ -49,20 +49,3 @@ jobs:
           tags: |
             ${{ env.IMAGE_NAME }}:latest
             ${{ env.IMAGE_NAME }}:${{ github.sha }}
-
-      - name: Deploy to EC2
-        uses: appleboy/ssh-action@v1.2.0
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script: |
-            sudo docker pull ${{ env.IMAGE_NAME }}:latest
-            sudo docker stop ${{ env.CONTAINER_NAME }} || true
-            sudo docker rm ${{ env.CONTAINER_NAME }} || true
-            sudo docker run -d \
-              --name ${{ env.CONTAINER_NAME }} \
-              --restart always \
-              -p 8080:8080 \
-              -e SPRING_PROFILES_ACTIVE=prod \
-              ${{ env.IMAGE_NAME }}:latest
