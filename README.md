@@ -15,4 +15,15 @@ JSON 출력 값
 
 >http://3.36.125.225:8080/actuator/info
 
+## ## LV 3 - 프로필 사진 기능 추가와 권한 관리
 
+### 프로필 이미지 Presigned URL 검증
+
+- Presigned URL 만료 시간: `2026-05-25T06:01:16.419357945`
+- Presigned URL 유효기간: 7일 
+
+### 접근 성공 스크린샷
+
+![profile-image-response.png](src/main/resources/images/profile-image-response.png)
+
+![profile-image-access-success.png](src/main/resources/images/profile-image-access-success.png)

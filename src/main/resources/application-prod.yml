@@ -18,3 +18,7 @@ spring:
 
 info:
   team-name: ${app.team-name}
+
+app:
+  s3:
+    bucket: ec2-test-s3bucket-jeoneungi

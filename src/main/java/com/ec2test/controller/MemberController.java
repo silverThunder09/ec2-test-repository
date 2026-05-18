@@ -2,12 +2,15 @@ package com.ec2test.controller;
 
 import com.ec2test.dto.MemberRequestDto;
 import com.ec2test.dto.MemberResponseDto;
+import com.ec2test.dto.ProfileImageUploadResponseDto;
+import com.ec2test.dto.ProfileImageUrlResponseDto;
 import com.ec2test.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequiredArgsConstructor
@@ -26,6 +29,20 @@ public class MemberController {
     @GetMapping("/{id}")
     public ResponseEntity<MemberResponseDto> getMember(@PathVariable Long id) {
         MemberResponseDto responseDto = memberService.getMember(id);
+
+        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
+    }
+
+    @PostMapping("/{id}/profile-image")
+    public ResponseEntity<ProfileImageUploadResponseDto> uploadProfileImage(@PathVariable Long id, @RequestPart("file") MultipartFile file) {
+        ProfileImageUploadResponseDto responseDto = memberService.uploadProfileImage(id, file);
+
+        return ResponseEntity.status(HttpStatus.OK).body(responseDto);
+    }
+
+    @GetMapping("/{id}/profile-image")
+    public ResponseEntity<ProfileImageUrlResponseDto> getProfileImageUrl(@PathVariable Long id) {
+        ProfileImageUrlResponseDto responseDto = memberService.getProfileImageUrl(id);
 
         return ResponseEntity.status(HttpStatus.OK).body(responseDto);
     }
