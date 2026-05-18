@@ -6,22 +6,23 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import com.ec2test.dto.MemberRequestDto;
 import com.ec2test.dto.MemberResponseDto;
 import com.ec2test.exception.MemberNotFoundException;
-import com.ec2test.support.TestS3Config;
 import java.lang.reflect.Field;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
 @SpringBootTest
 @ActiveProfiles("test")
-@Import(TestS3Config.class)
 class MemberServiceTest {
 
     @Autowired
     private MemberService memberService;
+
+    @MockitoBean
+    private S3Service s3Service;
 
     @Test
     @DisplayName("팀원 저장 서비스는 팀원 정보를 저장한다")
