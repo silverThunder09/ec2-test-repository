@@ -42,7 +42,7 @@ JSON 출력 값
 
 ### HTTPS 적용된 도메인 URL
 
-> https://eungilab/actuator/health
+> https://eungilab.dev/actuator/health
 
 ![https-domain.png](src/main/resources/images/https-domain.png)
 
